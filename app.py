@@ -78,7 +78,7 @@ def get_user_reflections():
 
 
 @app.route('/api/add_user', methods = ['Post'])
-def find_user():
+def add_user():
     try:
         return jsonify({'add_user': 'success'})
     except Exception as e:
@@ -93,15 +93,15 @@ def add_task():
         return jsonify({'error': str(e)})
     
 
-@app.route('/api/add_task_descriptions', methods = ['Post'])
+@app.route('/api/add_task_description', methods = ['Post'])
 def add_task_descriptions():
     try:
         return jsonify({'add_task_descriptions': 'success'})
     except Exception as e:
         return jsonify({'error': str(e)})
 
-@app.route('/api/add_reflections', methods = ['Post'])
-def get_user_reflections():
+@app.route('/api/add_reflection', methods = ['Post'])
+def add_reflections():
     try:
         return jsonify({'add_reflections': 'success'})
     except Exception as e:
