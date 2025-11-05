@@ -1,10 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hello World Page</title>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Management – CSCI 414 Group 1</title>
+ <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
 <body>
-    <h1>Hello World!</h1>
-    <p>This is a simple "Hello World" example in HTML.</p>
+  <div class="container">
+    <header class="header">
+      <h1>Task Priority Manager</h1>
+      <div class="header-buttons">
+        <button class="add-btn" onclick="openAddModal()">+ Add Task</button>
+        <button class="add-btn" onclick="openTeamModal()">Join Team</button>
+        <button class="add-btn" onclick="toggleCompletedView()">View Completed</button>
+      </div>
+    </header>
+
+    <section class="legend">
+      <h3>Priority Levels</h3>
+      <ul>
+        <li>Level 1 – Critical (3 days or less)</li>
+        <li>Level 2 – Important (4-6 days out)</li>
+        <li>Level 3 – Urgent (7-9 days out)</li>
+        <li>Level 4 – Low (10+ days out)</li>
+      </ul>
+    </section>
+
+    <section class="filters">
+      <strong>Filter by Priority:</strong>
+      <button class="filter-btn active" onclick="filterByPriority('all')">All</button>
+      <button class="filter-btn" onclick="filterByPriority(1)">Level 1</button>
+      <button class="filter-btn" onclick="filterByPriority(2)">Level 2</button>
+      <button class="filter-btn" onclick="filterByPriority(3)">Level 3</button>
+      <button class="filter-btn" onclick="filterByPriority(4)">Level 4</button>
+    </section>
+
+    <section id="tasksContainer" class="tasks"></section>
+  </div>
+
+  <!-- Add Task Modal -->
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <h2>Add New Task</h2>
+      <input id="taskTitle" placeholder="Task Title">
+      <textarea id="taskDescription" placeholder="Description"></textarea>
+      <input type="date" id="taskDueDate">
+      <div>
+        <button onclick="addTask()">Add Task</button>
+        <button onclick="closeAddModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Task Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <h2>Edit Task</h2>
+      <input id="editTaskTitle" placeholder="Task Title">
+      <textarea id="editTaskDescription" placeholder="Description"></textarea>
+      <input type="date" id="editTaskDueDate">
+      <div>
+        <button onclick="saveEdit()">Save Changes</button>
+        <button onclick="closeEditModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team Modal -->
+  <div id="teamModal" class="modal">
+    <div class="modal-content">
+      <h2>Join a Team/Group</h2>
+      <input id="teamName" placeholder="Your Name">
+      <input id="teamGroupName" placeholder="Team/Group Name">
+      <div>
+        <button class="team-btn" onclick="joinTeam()">Join Team</button>      
+        <button class="team-btn" onclick="closeTeamModal()">Close</button>
+      </div>
+      <div id="teamInfo"></div>
+    </div>
+  </div>
+
+  <!-- Reflection Modal -->
+  <div id="reflectionModal" class="modal">
+    <div class="modal-content">
+      <h2>Reflect on Missed Task</h2>
+      <p><strong>Task:</strong> <span id="reflectionTaskTitle"></span></p>
+      <p><strong>Due Date:</strong> <span id="reflectionTaskDate"></span></p>
+      <p>This task is overdue. Please take a moment to reflect on why you missed this deadline:</p>
+      <textarea id="reflectionText" placeholder="Why did you miss this deadline? What can you do differently next time?"></textarea>
+      <div>
+        <button onclick="submitReflection()">Submit Reflection</button>
+        <button onclick="closeReflectionModal()">Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='test.js') }}" defer></script>
 </body>
 </html>
